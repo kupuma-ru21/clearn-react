@@ -10,7 +10,6 @@ type StateProps = {
 
 const Login: React.FC = () => {
   const [state] = useState<StateProps>({ isLoading: false, errorMessage: '' })
-  console.log(state)
   return (
     <div className={Styles.login}>
       <Header />
@@ -23,7 +22,12 @@ const Login: React.FC = () => {
             name="password"
             placeholder="Digite sua senha"
           />
-          <button className={Styles.submit} type="submit">
+          <button
+            data-testid="submit"
+            disabled
+            className={Styles.submit}
+            type="submit"
+          >
             Enter
           </button>
           <span className={Styles.link}>Cliar conta</span>
