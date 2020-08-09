@@ -41,5 +41,5 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-  plugin: [new CleanWebpackPlugin()],
+  plugins: [new CleanWebpackPlugin()],
 };
