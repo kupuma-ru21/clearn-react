@@ -60,25 +60,6 @@ button {
       text-transform: uppercase;
     }
 
-    .inpuWrap {
-      margin-top: 16px;
-      display: flex;
-      position: relative;
-      align-items: center;
-    }
-
-    input {
-      flex-grow: 1;
-      flex-direction: row;
-    }
-
-    .status {
-      position: absolute;
-      right: 8px;
-      font-size: 12px;
-      cursor: help;
-    }
-
     .submit {
       margin-top: 32px;
     }
@@ -107,10 +88,5 @@ button {
         padding-bottom: 5px;
       }
     }
-  }
-
-  .footer {
-    background-color: $primary;
-    height: 48px;
   }
 }
