@@ -48,12 +48,12 @@ describe('Login Component', () => {
   })
 })
 
-describe('Shoud call Validation with correct email', () => {
+describe('Shoud call Validation with correct password', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
 
-    const emailInput = sut.getByTestId('email')
-    fireEvent.input(emailInput, { target: { value: 'any_email' } })
-    expect(validationSpy.input).toEqual({ email: 'any_email' })
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: 'any_password' } })
+    expect(validationSpy.input).toEqual({ password: 'any_password' })
   })
 })
