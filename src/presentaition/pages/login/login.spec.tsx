@@ -96,3 +96,23 @@ describe('Shoud show valid password state if Validation succeed', () => {
     expect(passwordStatus.textContent).toBe('🔵')
   })
 })
+
+describe('Shoud enable submit button if form is valid', () => {
+  test('Shoud start with initial state', () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.errorMessage = null
+
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, {
+      target: { value: faker.internet.email() }
+    })
+
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, {
+      target: { value: faker.internet.password() }
+    })
+
+    const sbmitButton = sut.getByTestId('submit') as HTMLButtonElement
+    expect(sbmitButton.disabled).toBe(false)
+  })
+})
