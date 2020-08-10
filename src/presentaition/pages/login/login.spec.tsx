@@ -151,3 +151,11 @@ describe('Shoud call Authentication with correct values', () => {
     expect(authenticationSpy.params).toEqual({ email, password })
   })
 })
+
+describe('Shoud call Authentication only once', () => {
+  test('Shoud start with initial state', () => {
+    const { sut, authenticationSpy } = makeSut()
+    simulateValidSubmission(sut)
+    expect(authenticationSpy.callsCount).toBe(1)
+  })
+})
