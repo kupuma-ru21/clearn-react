@@ -6,7 +6,7 @@ import { AuthenticationParams } from '@/domain/usecases'
 import { AccountModel } from '@/domain/models'
 import {
   mockAuthentication,
-  mockAcountModel
+  mockAccountModel
 } from '@/domain/test/mock-account'
 import faker from 'faker'
 
@@ -99,7 +99,7 @@ describe('RemoteAuthentication', () => {
 describe('RemoteAuthentication', () => {
   test('Shoud return an AccountModel if HttpPostClient returns 200', async () => {
     const { sut, httpPostClientSpy } = makeSut()
-    const httpResult = mockAcountModel()
+    const httpResult = mockAccountModel()
     httpPostClientSpy.response = {
       statusCode: HttpStatusCode.ok,
       body: httpResult
