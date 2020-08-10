@@ -83,44 +83,33 @@ describe('Login Component', () => {
     simulateStatusForField(sut, 'email', validationError)
     simulateStatusForField(sut, 'password', validationError)
   })
-})
-
-describe('Shoud show email error if Validation fails', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populateEmailField(sut)
     simulateStatusForField(sut, 'email', validationError)
   })
-})
 
-describe('Shoud show password error if Validation fails', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud show password error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populatePasswordField(sut)
     simulateStatusForField(sut, 'password', validationError)
   })
-})
 
-describe('Shoud show valid email state if Validation succeed', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud show valid email state if Validation succeed', () => {
     const { sut } = makeSut()
     populateEmailField(sut)
     simulateStatusForField(sut, 'email')
   })
-})
 
-describe('Shoud show valid password state if Validation succeed', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud show valid password state if Validation succeed', () => {
     const { sut } = makeSut()
     populatePasswordField(sut)
     simulateStatusForField(sut, 'password')
   })
-})
 
-describe('Shoud enable submit button if form is valid', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud enable submit button if form is valid', () => {
     const { sut } = makeSut()
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, {
@@ -133,48 +122,38 @@ describe('Shoud enable submit button if form is valid', () => {
     const submitButton = sut.getByTestId('submit') as HTMLButtonElement
     expect(submitButton.disabled).toBe(false)
   })
-})
 
-describe('Shoud show spinner on submit', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud show spinner on submit', () => {
     const { sut } = makeSut()
     simulateValidSubmit(sut)
     const spinner = sut.getByTestId('spinner')
     expect(spinner).toBeTruthy()
   })
-})
 
-describe('Shoud call Authentication with correct values', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud call Authentication with correct values', () => {
     const { sut, authenticationSpy } = makeSut()
     const email = faker.internet.email()
     const password = faker.internet.password()
     simulateValidSubmit(sut, email, password)
     expect(authenticationSpy.params).toEqual({ email, password })
   })
-})
 
-describe('Shoud call Authentication only once', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud call Authentication only once', () => {
     const { sut, authenticationSpy } = makeSut()
     simulateValidSubmit(sut)
     simulateValidSubmit(sut)
     expect(authenticationSpy.callsCount).toBe(1)
   })
-})
 
-describe('Shoud not call Authentication if form is valid', () => {
-  test('Shoud start with initial state', () => {
+  test('Shoud not call Authentication if form is valid', () => {
     const validationError = faker.random.words()
     const { sut, authenticationSpy } = makeSut({ validationError })
     populateEmailField(sut)
     fireEvent.submit(sut.getByTestId('form'))
     expect(authenticationSpy.callsCount).toBe(0)
   })
-})
 
-describe('Shoud present error if Authentication fails', () => {
-  test('Shoud start with initial state', async () => {
+  test('Shoud present error if Authentication fails', async () => {
     const { sut, authenticationSpy } = makeSut()
     const error = new InvaildCredentialsError()
     jest
