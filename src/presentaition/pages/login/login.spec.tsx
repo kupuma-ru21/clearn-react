@@ -3,11 +3,13 @@ import {
   render,
   RenderResult,
   fireEvent,
-  cleanup
+  cleanup,
+  waitFor
 } from '@testing-library/react'
 import Login from './login'
 import { ValidationStub, AuthenticationSpy } from '@/presentaition/test'
 import faker from 'faker'
+import { InvaildCredentialsError } from '@/domain/errors'
 
 type SutType = {
   sut: RenderResult
@@ -27,7 +29,7 @@ const makeSut = (params?: SutParams): SutType => {
   return { sut, authenticationSpy }
 }
 
-const simulateValidSubmission = (
+const simulateValidSubmit = (
   sut: RenderResult,
   email = faker.internet.email(),
   password = faker.internet.password()
@@ -136,7 +138,7 @@ describe('Shoud enable submit button if form is valid', () => {
 describe('Shoud show spinner on submit', () => {
   test('Shoud start with initial state', () => {
     const { sut } = makeSut()
-    simulateValidSubmission(sut)
+    simulateValidSubmit(sut)
     const spinner = sut.getByTestId('spinner')
     expect(spinner).toBeTruthy()
   })
@@ -147,7 +149,7 @@ describe('Shoud call Authentication with correct values', () => {
     const { sut, authenticationSpy } = makeSut()
     const email = faker.internet.email()
     const password = faker.internet.password()
-    simulateValidSubmission(sut, email, password)
+    simulateValidSubmit(sut, email, password)
     expect(authenticationSpy.params).toEqual({ email, password })
   })
 })
@@ -155,8 +157,8 @@ describe('Shoud call Authentication with correct values', () => {
 describe('Shoud call Authentication only once', () => {
   test('Shoud start with initial state', () => {
     const { sut, authenticationSpy } = makeSut()
-    simulateValidSubmission(sut)
-    simulateValidSubmission(sut)
+    simulateValidSubmit(sut)
+    simulateValidSubmit(sut)
     expect(authenticationSpy.callsCount).toBe(1)
   })
 })
@@ -168,5 +170,21 @@ describe('Shoud not call Authentication if form is valid', () => {
     populateEmailField(sut)
     fireEvent.submit(sut.getByTestId('form'))
     expect(authenticationSpy.callsCount).toBe(0)
+  })
+})
+
+describe('Shoud present error if Authentication fails', () => {
+  test('Shoud start with initial state', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    const error = new InvaildCredentialsError()
+    jest
+      .spyOn(authenticationSpy, 'auth')
+      .mockReturnValue(Promise.reject(error))
+    simulateValidSubmit(sut)
+    const errorWrap = sut.getByTestId('error-wrap')
+    await waitFor(() => errorWrap)
+    const mainError = sut.getByTestId('main-error')
+    expect(mainError.textContent).toBe(error.message)
+    expect(errorWrap.childElementCount).toBe(1)
   })
 })
