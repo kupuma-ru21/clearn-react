@@ -32,8 +32,8 @@ describe('Login Component', () => {
     const errorWrap = sut.getByTestId('error-wrap')
     expect(errorWrap.childElementCount).toBe(0)
 
-    const sbmitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(sbmitButton.disabled).toBe(true)
+    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
+    expect(submitButton.disabled).toBe(true)
 
     const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe(validationError)
@@ -112,7 +112,25 @@ describe('Shoud enable submit button if form is valid', () => {
     fireEvent.input(passwordInput, {
       target: { value: faker.internet.password() }
     })
-    const sbmitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(sbmitButton.disabled).toBe(false)
+    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
+    expect(submitButton.disabled).toBe(false)
+  })
+})
+
+describe('Shoud show spinner on submit', () => {
+  test('Shoud start with initial state', () => {
+    const { sut } = makeSut()
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, {
+      target: { value: faker.internet.email() }
+    })
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, {
+      target: { value: faker.internet.password() }
+    })
+    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
+    fireEvent.click(submitButton)
+    const spinner = sut.getByTestId('spinner')
+    expect(spinner).toBeTruthy()
   })
 })
