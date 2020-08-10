@@ -1,4 +1,6 @@
 import React from 'react'
+import faker from 'faker'
+import 'jest-localstorage-mock'
 import {
   render,
   RenderResult,
@@ -8,7 +10,6 @@ import {
 } from '@testing-library/react'
 import Login from './login'
 import { ValidationStub, AuthenticationSpy } from '@/presentaition/test'
-import faker from 'faker'
 import { InvaildCredentialsError } from '@/domain/errors'
 
 type SutType = {
@@ -72,6 +73,10 @@ const simulateStatusForField = (
 
 describe('Login Component', () => {
   afterEach(cleanup)
+
+  beforeEach(() => {
+    localStorage.clear()
+  })
   test('Shoud start with initial state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
@@ -165,5 +170,15 @@ describe('Login Component', () => {
     const mainError = sut.getByTestId('main-error')
     expect(mainError.textContent).toBe(error.message)
     expect(errorWrap.childElementCount).toBe(1)
+  })
+
+  test('Shoud add accessToken to localstorage on success', async () => {
+    const { sut, authenticationSpy } = makeSut()
+    simulateValidSubmit(sut)
+    await waitFor(() => sut.getByTestId('form'))
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      'accessToken',
+      authenticationSpy.account.accessToken
+    )
   })
 })
