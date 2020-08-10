@@ -1,17 +1,35 @@
 import React from 'react'
-import { render, RenderResult } from '@testing-library/react'
+import {
+  render,
+  RenderResult,
+  fireEvent,
+  cleanup
+} from '@testing-library/react'
 import Login from './login'
+import { Validation } from '@/presentaition/protocols/validation'
 
 type SutType = {
   sut: RenderResult
+  validationSpy: ValidationSpy
 };
 
+class ValidationSpy implements Validation {
+  errorMessage: string;
+  input: object;
+  validate (input: object): string {
+    this.input = input
+    return this.errorMessage
+  }
+}
+
 const makeSut = (): SutType => {
-  const sut = render(<Login />)
-  return { sut }
+  const validationSpy = new ValidationSpy()
+  const sut = render(<Login validation={validationSpy} />)
+  return { sut, validationSpy }
 }
 
 describe('Login Component', () => {
+  afterEach(cleanup)
   test('Shoud start with initial state', () => {
     const { sut } = makeSut()
     const errorWrap = sut.getByTestId('error-wrap')
@@ -27,5 +45,15 @@ describe('Login Component', () => {
     const passwordStatus = sut.getByTestId('password-status')
     expect(passwordStatus.title).toBe('Campo obrigat6rio')
     expect(passwordStatus.textContent).toBe('🔴')
+  })
+})
+
+describe('Shoud call Validation with correct email', () => {
+  test('Shoud start with initial state', () => {
+    const { sut, validationSpy } = makeSut()
+
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, { target: { value: 'any_email' } })
+    expect(validationSpy.input).toEqual({ email: 'any_email' })
   })
 })
