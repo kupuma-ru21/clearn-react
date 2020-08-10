@@ -22,7 +22,6 @@ const Input: React.FC<Props> = (props: Props) => {
   const getTitle = (): string => {
     return error
   }
-  console.log(getTitle())
   return (
     <div className={Styles.inputWrap}>
       <input {...props} readOnly onFocus={enableInput} />
