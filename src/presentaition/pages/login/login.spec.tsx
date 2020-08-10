@@ -41,7 +41,7 @@ describe('Login Component', () => {
   })
 })
 
-describe('Shoud call email error if Validation fails', () => {
+describe('Shoud show email error if Validation fails', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
     const emailInput = sut.getByTestId('email')
@@ -53,7 +53,7 @@ describe('Shoud call email error if Validation fails', () => {
   })
 })
 
-describe('Shoud call password error if Validation fails', () => {
+describe('Shoud show password error if Validation fails', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
     const passwordInput = sut.getByTestId('password')
@@ -64,5 +64,20 @@ describe('Shoud call password error if Validation fails', () => {
     const passwordStatus = sut.getByTestId('password-status')
     expect(passwordStatus.title).toBe(validationSpy.errorMessage)
     expect(passwordStatus.textContent).toBe('🔴')
+  })
+})
+
+describe('Shoud show valid password state if Validation succeed', () => {
+  test('Shoud start with initial state', () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.errorMessage = null
+    const passwordInput = sut.getByTestId('password')
+
+    fireEvent.input(passwordInput, {
+      target: { value: faker.internet.password() }
+    })
+    const passwordStatus = sut.getByTestId('password-status')
+    expect(passwordStatus.title).toBe('Todo certo!')
+    expect(passwordStatus.textContent).toBe('🔵')
   })
 })
