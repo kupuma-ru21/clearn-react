@@ -67,6 +67,21 @@ describe('Shoud show password error if Validation fails', () => {
   })
 })
 
+describe('Shoud show valid email state if Validation succeed', () => {
+  test('Shoud start with initial state', () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.errorMessage = null
+    const emailInput = sut.getByTestId('email')
+
+    fireEvent.input(emailInput, {
+      target: { value: faker.internet.email() }
+    })
+    const emailStatus = sut.getByTestId('email-status')
+    expect(emailStatus.title).toBe('Todo certo!')
+    expect(emailStatus.textContent).toBe('🔵')
+  })
+})
+
 describe('Shoud show valid password state if Validation succeed', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
