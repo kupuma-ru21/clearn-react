@@ -156,6 +156,17 @@ describe('Shoud call Authentication only once', () => {
   test('Shoud start with initial state', () => {
     const { sut, authenticationSpy } = makeSut()
     simulateValidSubmission(sut)
+    simulateValidSubmission(sut)
     expect(authenticationSpy.callsCount).toBe(1)
+  })
+})
+
+describe('Shoud not call Authentication if form is valid', () => {
+  test('Shoud start with initial state', () => {
+    const validationError = faker.random.words()
+    const { sut, authenticationSpy } = makeSut({ validationError })
+    populateEmailField(sut)
+    fireEvent.submit(sut.getByTestId('form'))
+    expect(authenticationSpy.callsCount).toBe(0)
   })
 })
