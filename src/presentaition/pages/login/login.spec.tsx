@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react'
 import Login from './login'
 import { ValidationSpy } from '@/presentaition/test'
+import faker from 'faker'
 
 type SutType = {
   sut: RenderResult
@@ -43,10 +44,11 @@ describe('Shoud call Validation with correct password', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
     const emailInput = sut.getByTestId('email')
+    const email = faker.internet.email()
 
-    fireEvent.input(emailInput, { target: { value: 'any_email' } })
+    fireEvent.input(emailInput, { target: { value: email } })
     expect(validationSpy.fieldName).toBe('email')
-    expect(validationSpy.fieldValue).toBe('any_email')
+    expect(validationSpy.fieldValue).toBe(email)
   })
 })
 
@@ -54,9 +56,10 @@ describe('Shoud call Validation with correct password', () => {
   test('Shoud start with initial state', () => {
     const { sut, validationSpy } = makeSut()
     const passwordInput = sut.getByTestId('password')
+    const password = faker.internet.password()
 
-    fireEvent.input(passwordInput, { target: { value: 'any_password' } })
+    fireEvent.input(passwordInput, { target: { value: password } })
     expect(validationSpy.fieldName).toBe('password')
-    expect(validationSpy.fieldValue).toBe('any_password')
+    expect(validationSpy.fieldValue).toBe(password)
   })
 })
