@@ -34,6 +34,7 @@ const Input: React.FC<Props> = (props: Props) => {
         readOnly
         onFocus={enableInput}
         onChange={handleChange}
+        autoComplete={props.name}
       />
       <span
         data-testid={`${props.name}-status`}

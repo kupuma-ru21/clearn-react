@@ -43,4 +43,5 @@ module.exports = {
     'react-dom': 'ReactDOM',
   },
   plugins: [new CleanWebpackPlugin()],
+  devtool: 'eval-source-map',
 };
