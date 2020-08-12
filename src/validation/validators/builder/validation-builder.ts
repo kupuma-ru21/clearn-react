@@ -31,7 +31,6 @@ export class ValidationBuilder {
   }
 
   build (): FieldValidation[] {
-    console.log(this.validations)
     return this.validations
   }
 }
