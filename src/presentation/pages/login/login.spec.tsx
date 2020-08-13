@@ -10,7 +10,11 @@ import {
   waitFor
 } from '@testing-library/react'
 import { Login } from '@/presentation/pages'
-import { ValidationStub, AuthenticationSpy , SaveAccessTokenMock } from '@/presentation/test'
+import {
+  ValidationStub,
+  AuthenticationSpy,
+  SaveAccessTokenMock
+} from '@/presentation/test'
 import { InvaildCredentialsError } from '@/domain/errors'
 
 type SutType = {
@@ -208,6 +212,17 @@ describe('Login Component', () => {
     )
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
+  })
+
+  test('Shoud present error if SaveAccessToken fails', async () => {
+    const { sut, saveAccessTokenMock } = makeSut()
+    const error = new InvaildCredentialsError()
+    jest
+      .spyOn(saveAccessTokenMock, 'save')
+      .mockReturnValue(Promise.reject(error))
+    await simulateValidSubmit(sut)
+    testElementText(sut, 'main-error', error.message)
+    testErrorWrapChildCount(sut, 1)
   })
 
   test('Shoud go to sign up page', () => {
