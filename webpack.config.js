@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -37,11 +38,17 @@ module.exports = {
     contentBase: './public',
     writeToDisk: true,
     historyApiFallback: true,
+    port: 3001,
   },
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new DefinePlugin({
+      'process.env.API_URL': 'http://fordevs.herokuapp.com/api',
+    }),
+  ],
   devtool: 'eval-source-map',
 };
