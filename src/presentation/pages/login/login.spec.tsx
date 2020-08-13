@@ -10,8 +10,8 @@ import {
   cleanup,
   waitFor
 } from '@testing-library/react'
-import Login from './login'
-import { ValidationStub, AuthenticationSpy } from '@/presentaition/test'
+import { Login } from '@/presentation/pages'
+import { ValidationStub, AuthenticationSpy } from '@/presentation/test'
 import { InvaildCredentialsError } from '@/domain/errors'
 
 type SutType = {

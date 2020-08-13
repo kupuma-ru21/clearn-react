@@ -1,4 +1,4 @@
-import { Validation } from '@/presentaition/protocols/validation'
+import { Validation } from '@/presentation/protocols/validation'
 
 export class ValidationStub implements Validation {
   errorMessage: string;

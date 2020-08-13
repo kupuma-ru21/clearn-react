@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router } from '@/presentaition/compenents'
+import { Router } from '@/presentation/components'
 import { makeLogin } from '@/main/factories/pages/login/login-factories'
 import '@/presentaition/styles/global.scss'
 
