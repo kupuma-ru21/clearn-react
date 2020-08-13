@@ -4,4 +4,4 @@ node_js:
 
 script:
   - lint-check
-  - npm run test:ci
+  - npm run test:coveralls
