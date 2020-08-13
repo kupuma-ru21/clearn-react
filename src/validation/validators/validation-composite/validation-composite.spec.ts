@@ -5,7 +5,7 @@ import { FieldValidationSpy } from '@/validation/test/mock-field-validation'
 type Suttype = {
   sut: ValidationComposite
   fieldValidationsSpy: FieldValidationSpy[]
-};
+}
 
 const makeSut = (fieldName: string): Suttype => {
   const fieldValidationsSpy = [

@@ -9,7 +9,7 @@ import { Authentication } from '@/domain/usecases/authentication'
 type Props = {
   validation: Validation
   authentication: Authentication
-};
+}
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
   const history = useHistory()

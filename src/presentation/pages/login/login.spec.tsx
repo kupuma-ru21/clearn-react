@@ -17,10 +17,10 @@ import { InvaildCredentialsError } from '@/domain/errors'
 type SutType = {
   sut: RenderResult
   authenticationSpy: AuthenticationSpy
-};
+}
 type SutParams = {
   validationError: string
-};
+}
 
 const history = createMemoryHistory({ initialEntries: ['/login'] })
 const makeSut = (params?: SutParams): SutType => {
