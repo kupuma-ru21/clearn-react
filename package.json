@@ -10,7 +10,7 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
     "check": "npm-check -u -s",
-    "eslint": "eslint src/**"
+    "lint-check": "eslint src/**"
   },
   "keywords": [],
   "author": "",
