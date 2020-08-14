@@ -38,12 +38,14 @@ const SignUp: React.FC<Props> = ({
     mainError: ''
   })
   useEffect(() => {
-    const nameError = validation.validate('name', state.name)
-    const emailError = validation.validate('email', state.email)
-    const passwordError = validation.validate('password', state.password)
+    const { name, email, password, passwordConfirmation } = state
+    const formdata = { name, email, password, passwordConfirmation }
+    const nameError = validation.validate('name', formdata)
+    const emailError = validation.validate('email', formdata)
+    const passwordError = validation.validate('password', formdata)
     const passwordConfirmationError = validation.validate(
       'passwordConfirmation',
-      state.passwordConfirmation
+      formdata
     )
     setState({
       ...state,
