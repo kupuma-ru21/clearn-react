@@ -1,11 +1,7 @@
 import { AddAccount, AddAccountParams } from '@/domain/usecases'
 import { AccountModel } from '@/domain/models/account-model'
 import { HttpPostClient, HttpStatusCode } from '@/data/protocols/http'
-import {
-  EmailInUseError,
-  UnexpectedError,
-  InvaildCredentialsError
-} from '@/domain/errors'
+import { EmailInUseError, UnexpectedError } from '@/domain/errors'
 
 export class RemoteAddAccount implements AddAccount {
   constructor (
@@ -25,8 +21,6 @@ export class RemoteAddAccount implements AddAccount {
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
         return httpResponse.body
-      case HttpStatusCode.unauthorized:
-        throw new InvaildCredentialsError()
       case HttpStatusCode.forbidden:
         throw new EmailInUseError()
       default:

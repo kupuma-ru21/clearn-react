@@ -64,7 +64,7 @@ describe('RemoteAddAccountParams', () => {
   test('Shoud throw UnexpectedError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = {
-      statusCode: HttpStatusCode.notFound
+      statusCode: HttpStatusCode.serverError
     }
     const promise = sut.add(mockAddAccountParams())
 
