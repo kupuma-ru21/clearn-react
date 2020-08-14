@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Styles from './login-styles.scss'
-import { Header, Footer, Input, FormStatus } from '@/presentation/components'
+import {
+  Header,
+  Footer,
+  Input,
+  FormStatus,
+  SubmitButton
+} from '@/presentation/components'
 import Context from '@/presentation/context/form/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication, SaveAccessToken } from '@/domain/usecases'
@@ -20,6 +26,7 @@ const Login: React.FC<Props> = ({
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
+    isFormIvalid: true,
     emailError: '',
     email: '',
     password: '',
@@ -27,10 +34,13 @@ const Login: React.FC<Props> = ({
     mainError: ''
   })
   useEffect(() => {
+    const emailError = validation.validate('email', state.email)
+    const passwordError = validation.validate('password', state.password)
     setState({
       ...state,
-      emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password)
+      emailError,
+      passwordError,
+      isFormIvalid: !!emailError || !!passwordError
     })
   }, [state.email, state.password])
 
@@ -39,7 +49,7 @@ const Login: React.FC<Props> = ({
   ): Promise<void> => {
     event.preventDefault()
     try {
-      if (state.isLoading || state.emailError || state.passwordError) return
+      if (state.isLoading || state.isFormIvalid) return
       setState({ ...state, isLoading: true })
       const account = await authentication.auth({
         email: state.email,
@@ -68,14 +78,7 @@ const Login: React.FC<Props> = ({
             name="password"
             placeholder="Digite sua senha"
           />
-          <button
-            data-testid="submit"
-            disabled={!!state.emailError || !!state.passwordError}
-            className={Styles.submit}
-            type="submit"
-          >
-            Enter
-          </button>
+          <SubmitButton text={'Enter'} />
           <Link data-testid="signup-link" to="/signup" className={Styles.link}>
             Cliar conta
           </Link>
