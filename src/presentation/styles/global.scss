@@ -12,6 +12,7 @@ body {
   background-color: $blackGround;
 }
 
+input[type='text'],
 input[type='email'],
 input[type='password'] {
   border: 1px solid $primaryLigth;
@@ -34,5 +35,12 @@ button {
 
   :hover {
     opacity: 0.9;
+  }
+  &:disabled {
+    background-color: $disabledBackground;
+    color: $disabledColor;
+  }
+  &:hover {
+    opacity: 1;
   }
 }
