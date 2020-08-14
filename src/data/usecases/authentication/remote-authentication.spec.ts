@@ -33,9 +33,7 @@ describe('RemoteAuthentication', () => {
     await sut.auth(mockAuthentication())
     expect(httpPostClientSpy.url).toBe(url)
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud call HttpPostClient with correct body', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     const AuthenticationParams = mockAuthentication()
@@ -43,9 +41,7 @@ describe('RemoteAuthentication', () => {
 
     expect(httpPostClientSpy.body).toEqual(AuthenticationParams)
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud throw InvaildCredentialsError if HttpPostClient returns 401', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = {
@@ -55,9 +51,7 @@ describe('RemoteAuthentication', () => {
 
     await expect(promise).rejects.toThrow(new InvaildCredentialsError())
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud throw UnexpectedError if HttpPostClient returns 400', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = {
@@ -67,9 +61,7 @@ describe('RemoteAuthentication', () => {
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud throw UnexpectedError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = {
@@ -79,9 +71,7 @@ describe('RemoteAuthentication', () => {
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud throw UnexpectedError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = {
@@ -91,9 +81,7 @@ describe('RemoteAuthentication', () => {
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
-})
 
-describe('RemoteAuthentication', () => {
   test('Shoud return an AccountModel if HttpPostClient returns 200', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     const httpResult = mockAccountModel()
