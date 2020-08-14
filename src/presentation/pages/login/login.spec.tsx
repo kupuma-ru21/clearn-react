@@ -152,9 +152,7 @@ describe('Login Component', () => {
   test('Shoud present error if SaveAccessToken fails', async () => {
     const { sut, saveAccessTokenMock } = makeSut()
     const error = new InvaildCredentialsError()
-    jest
-      .spyOn(saveAccessTokenMock, 'save')
-      .mockReturnValue(Promise.reject(error))
+    jest.spyOn(saveAccessTokenMock, 'save').mockRejectedValueOnce(error)
     await simulateValidSubmit(sut)
     Helper.testElementText(sut, 'main-error', error.message)
     Helper.testChildCount(sut, 'error-wrap', 1)
