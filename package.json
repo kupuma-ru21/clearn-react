@@ -12,7 +12,7 @@
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
     "check": "npm-check -u -s",
     "test:cypress": "cypress open",
-    "lint-check": "eslint src/**"
+    "lint:check": "./node_modules/.bin/eslint src/**"
   },
   "keywords": [],
   "author": "",
