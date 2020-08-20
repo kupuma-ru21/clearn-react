@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import Styles from './input-styles.scss'
 import Context from '@/presentation/context/form/form-context'
 
@@ -9,40 +9,39 @@ HTMLInputElement
 
 const Input: React.FC<Props> = (props: Props) => {
   const { state, setState } = useContext(Context)
+  const inputRef = useRef<HTMLInputElement>()
   const error = state[`${props.name}Error`]
 
-  const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
-    event.target.readOnly = false
-  }
-
-  const handleChange = (event: React.FocusEvent<HTMLInputElement>): void => {
-    setState({ ...state, [event.target.name]: event.target.value })
-  }
-
-  const getStatus = (): string => {
-    return error ? '🔴' : '🔵'
-  }
-
-  const getTitle = (): string => {
-    return error || 'Todo certo!'
-  }
   return (
-    <div className={Styles.inputWrap}>
+    <div
+      data-testid={`${props.name}-wrap`}
+      className={Styles.inputWrap}
+      data-status={error ? 'invalid' : 'valid'}
+    >
       <input
-        data-testid={props.name}
         {...props}
+        ref={inputRef}
+        title={error}
+        placeholder=" "
+        data-testid={props.name}
         readOnly
-        onFocus={enableInput}
-        onChange={handleChange}
+        onFocus={(e) => {
+          e.target.readOnly = false
+        }}
+        onChange={(e) =>
+          setState({ ...state, [e.target.name]: e.target.value })
+        }
         autoComplete={props.name}
       />
-      <span
-        data-testid={`${props.name}-status`}
-        title={getTitle()}
-        className={Styles.status}
+      <label
+        title={error}
+        data-testid={`${props.name}-label`}
+        onClick={() => {
+          inputRef.current.focus()
+        }}
       >
-        {getStatus()}
-      </span>
+        {props.placeholder}
+      </label>
     </div>
   )
 }
