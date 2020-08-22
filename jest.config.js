@@ -7,12 +7,12 @@ module.exports = {
     '!<rootDir>/src/**/index.ts',
     '!**/*.d.ts',
   ],
-  coverageDirectoy: 'coverage',
+  coverageDirectory: 'coverage',
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/src/main/test/cypress',
   ],
-  testEnviroment: 'jsdom',
+  testEnvironment: 'jsdom',
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest',
   },
