@@ -1,6 +1,6 @@
 import faker from 'faker'
 import * as FormHelper from '../support/form-helper'
-import * as Http from '../support/login-mocks'
+import * as Http from '../support/signup-mocks'
 
 const simulateValidSubmit = (): void => {
   cy.getByTestId('name').focus().type(faker.random.alphaNumeric(7))
@@ -70,10 +70,10 @@ describe('SignUp', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
-  it('Should present InvalidCredentinalsError on 403', () => {
+  it('Should present EmailInUseError on 403', () => {
     Http.mockEmailInUseError()
     simulateValidSubmit()
-    FormHelper.testMainError('Esse e-mail ja esta em uso')
+    FormHelper.testMainError('Email invailds')
     FormHelper.testUrl('/signup')
   })
 })
