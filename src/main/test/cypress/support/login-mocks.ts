@@ -4,9 +4,6 @@ import * as Helper from './http-mocks'
 export const mockInvalidCredentialsError = (): void =>
   Helper.mockInvalidCredentialsError(/login/)
 
-export const mockEmailInUseError = (): void =>
-  Helper.mockEmailInUseError(/login/)
-
 export const mockUnexpectedError = (): void =>
   Helper.mockUnexpectedError(/login/, 'POST')
 
