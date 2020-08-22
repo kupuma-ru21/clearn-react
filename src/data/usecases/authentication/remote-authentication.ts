@@ -4,7 +4,7 @@ import {
   Authentication
 } from '@/domain/usecases/authentication'
 import { InvaildCredentialsError, UnexpectedError } from '@/domain/errors'
-import { AccountModel } from '@/domain/models/account-model'
+import { AccountModel } from '@/domain/models'
 
 export class RemoteAuthentication implements Authentication {
   constructor (

@@ -1,5 +1,5 @@
 import { AddAccount, AddAccountParams } from '@/domain/usecases'
-import { AccountModel } from '@/domain/models/account-model'
+import { AccountModel } from '@/domain/models'
 import { HttpPostClient, HttpStatusCode } from '@/data/protocols/http'
 import { EmailInUseError, UnexpectedError } from '@/domain/errors'
 
