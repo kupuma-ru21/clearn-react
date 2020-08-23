@@ -1,6 +1,11 @@
-import React from 'react'
-import Styles from './survey-list-styles.scss'
-import { Footer, SurveyListHeader } from '@/presentation/components'
+import React from 'react';
+import Styles from './survey-list-styles.scss';
+import {
+  Footer,
+  SurveyListHeader,
+  Icon,
+  IconName,
+} from '@/presentation/components';
 
 const SurveyList: React.FC = () => {
   return (
@@ -11,9 +16,31 @@ const SurveyList: React.FC = () => {
         <ul>
           <li>
             <div className={Styles.surveyContent}>
-              <div className={[Styles.iconWrap, Styles.green].join(' ')}>
-                <img className={Styles.icon} src="" />
-              </div>
+              <Icon className={Styles.iconWrap} iconName={IconName.thumDown} />
+              <time>
+                <span className={Styles.day}>22</span>
+                <span className={Styles.month}>03</span>
+                <span className={Styles.year}>2020</span>
+              </time>
+              <p>Qual e seu framework web favorito?</p>
+            </div>
+            <footer>Ver Resultado</footer>
+          </li>
+          <li>
+            <div className={Styles.surveyContent}>
+              <Icon className={Styles.iconWrap} iconName={IconName.thumDown} />
+              <time>
+                <span className={Styles.day}>22</span>
+                <span className={Styles.month}>03</span>
+                <span className={Styles.year}>2020</span>
+              </time>
+              <p>Qual e seu framework web favorito?</p>
+            </div>
+            <footer>Ver Resultado</footer>
+          </li>
+          <li>
+            <div className={Styles.surveyContent}>
+              <Icon className={Styles.iconWrap} iconName={IconName.thumDown} />
               <time>
                 <span className={Styles.day}>22</span>
                 <span className={Styles.month}>03</span>
@@ -27,7 +54,7 @@ const SurveyList: React.FC = () => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default SurveyList
+export default SurveyList;
