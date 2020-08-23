@@ -18,50 +18,9 @@ const SurveyList: React.FC = () => {
         <ul>
           <li>
             <div className={Styles.surveyContent}>
-              <time>
-                <span className={Styles.day}>22</span>
-                <span className={Styles.month}>03</span>
-                <span className={Styles.year}>2020</span>
-              </time>
-              <p>Qual e seu framework web favorito?</p>
-            </div>
-            <footer>Ver Resultado</footer>
-          </li>
-          <li>
-            <div className={Styles.surveyContent}>
-              <time>
-                <span className={Styles.day}>22</span>
-                <span className={Styles.month}>03</span>
-                <span className={Styles.year}>2020</span>
-              </time>
-              <p>Qual e seu framework web favorito?</p>
-            </div>
-            <footer>Ver Resultado</footer>
-          </li>
-          <li>
-            <div className={Styles.surveyContent}>
-              <time>
-                <span className={Styles.day}>22</span>
-                <span className={Styles.month}>03</span>
-                <span className={Styles.year}>2020</span>
-              </time>
-              <p>Qual e seu framework web favorito?</p>
-            </div>
-            <footer>Ver Resultado</footer>
-          </li>
-          <li>
-            <div className={Styles.surveyContent}>
-              <time>
-                <span className={Styles.day}>22</span>
-                <span className={Styles.month}>03</span>
-                <span className={Styles.year}>2020</span>
-              </time>
-              <p>Qual e seu framework web favorito?</p>
-            </div>
-            <footer>Ver Resultado</footer>
-          </li>
-          <li>
-            <div className={Styles.surveyContent}>
+              <div className={[Styles.iconWrap, Styles.green].join(' ')}>
+                <img className={Styles.icon} src="" />
+              </div>
               <time>
                 <span className={Styles.day}>22</span>
                 <span className={Styles.month}>03</span>
