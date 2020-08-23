@@ -1,4 +1,5 @@
 export { default as Header } from './login-header/login-header'
+export { default as SurveyListHeader } from './survey-list-header/survey-list-header'
 export { default as Footer } from './login-footer/login-footer'
 export { default as Input } from './input/input'
 export { default as FormStatus } from './form-status/form-status'
