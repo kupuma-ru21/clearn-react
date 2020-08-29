@@ -1,7 +1,7 @@
-import React from 'react'
-import { makeRemoteAddAccount } from '@/main/factories//usecases/add-account/remote-add-account-factory'
-import { SignUp } from '@/presentation/pages'
-import { makeSignUpValidation } from './signup-validation-factory'
+import React from 'react';
+import { makeRemoteAddAccount } from '@/main/factories//usecases/add-account/remote-add-account-factory';
+import { SignUp } from '@/presentation/pages';
+import { makeSignUpValidation } from './signup-validation-factory';
 
 export const makeSignUp: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ export const makeSignUp: React.FC = () => {
       addAccount={makeRemoteAddAccount()}
       validation={makeSignUpValidation()}
     />
-  )
-}
+  );
+};
 
-export default makeSignUp
+export default makeSignUp;

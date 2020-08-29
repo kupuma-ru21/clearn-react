@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import Styles from './signup-styles.scss'
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Styles from './signup-styles.scss';
 import {
   Header,
   Footer,
   Input,
   FormStatus,
-  SubmitButton
-} from '@/presentation/components'
-import { FormContext, ApiContext } from '@/presentation/context'
-import { Validation } from '@/presentation/protocols/validation'
-import { AddAccount } from '@/domain/usecases'
+  SubmitButton,
+} from '@/presentation/components';
+import { FormContext, ApiContext } from '@/presentation/context';
+import { Validation } from '@/presentation/protocols/validation';
+import { AddAccount } from '@/domain/usecases';
 
 type Props = {
-  validation: Validation
-  addAccount: AddAccount
-}
+  validation: Validation;
+  addAccount: AddAccount;
+};
 
 const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
-  const { setCurrentAccount } = useContext(ApiContext)
-  const history = useHistory()
+  const { setCurrentAccount } = useContext(ApiContext);
+  const history = useHistory();
   const [state, setState] = useState({
     isLoading: false,
     isFormIvalid: true,
@@ -31,18 +31,18 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
     nameError: '',
     passwordError: 'Comp obrigat6rio',
     passwordConfirmationError: 'Comp obrigat6rio',
-    mainError: ''
-  })
+    mainError: '',
+  });
   useEffect(() => {
-    const { name, email, password, passwordConfirmation } = state
-    const formdata = { name, email, password, passwordConfirmation }
-    const nameError = validation.validate('name', formdata)
-    const emailError = validation.validate('email', formdata)
-    const passwordError = validation.validate('password', formdata)
+    const { name, email, password, passwordConfirmation } = state;
+    const formdata = { name, email, password, passwordConfirmation };
+    const nameError = validation.validate('name', formdata);
+    const emailError = validation.validate('email', formdata);
+    const passwordError = validation.validate('password', formdata);
     const passwordConfirmationError = validation.validate(
       'passwordConfirmation',
       formdata
-    )
+    );
     setState({
       ...state,
       nameError,
@@ -53,29 +53,29 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
         !!nameError ||
         !!emailError ||
         !!passwordError ||
-        !!passwordConfirmationError
-    })
-  }, [state.name, state.email, state.password, state.passwordConfirmation])
+        !!passwordConfirmationError,
+    });
+  }, [state.name, state.email, state.password, state.passwordConfirmation]);
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
-    event.preventDefault()
-    if (state.isLoading || state.isFormIvalid) return
+    event.preventDefault();
+    if (state.isLoading || state.isFormIvalid) return;
     try {
-      setState({ ...state, isLoading: true })
+      setState({ ...state, isLoading: true });
       const account = await addAccount.add({
         name: state.name,
         email: state.email,
         password: state.password,
-        passwordConfirmation: state.passwordConfirmation
-      })
-      setCurrentAccount(account)
-      history.replace('/')
+        passwordConfirmation: state.passwordConfirmation,
+      });
+      setCurrentAccount(account);
+      history.replace('/');
     } catch (error) {
-      setState({ ...state, isLoading: false, mainError: error.message })
+      setState({ ...state, isLoading: false, mainError: error.message });
     }
-  }
+  };
   return (
     <div className={Styles.signupWrap}>
       <Header />
@@ -112,7 +112,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
       </FormContext.Provider>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

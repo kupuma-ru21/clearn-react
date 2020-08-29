@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import Styles from './survey-list-styles.scss'
-import { LoadSurveyList } from '@/domain/usecases'
-import { SurveyItemEmpty } from '@/presentation/pages/survey-list/components'
-import { Footer, SurveyListHeader } from '@/presentation/components'
+import React, { useEffect } from 'react';
+import Styles from './survey-list-styles.scss';
+import { LoadSurveyList } from '@/domain/usecases';
+import { SurveyItemEmpty } from '@/presentation/pages/survey-list/components';
+import { Footer, SurveyListHeader } from '@/presentation/components';
 
 type Props = {
-  loadSurveyList: LoadSurveyList
-}
+  loadSurveyList: LoadSurveyList;
+};
 
 const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
   useEffect(() => {
     (async function () {
-      loadSurveyList.loadAll()
-    })()
-  }, [])
+      loadSurveyList.loadAll();
+    })();
+  }, []);
 
   return (
     <div className={Styles.surveyListWrap}>
@@ -26,7 +26,7 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default SurveyList
+export default SurveyList;

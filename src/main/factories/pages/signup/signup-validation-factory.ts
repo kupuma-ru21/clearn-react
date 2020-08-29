@@ -1,7 +1,7 @@
 import {
   ValidationComposite,
-  ValidationBuilder as Builer
-} from '@/validation/validators'
+  ValidationBuilder as Builer,
+} from '@/validation/validators';
 
 export const makeSignUpValidation = (): ValidationComposite => {
   return ValidationComposite.build([
@@ -11,6 +11,6 @@ export const makeSignUpValidation = (): ValidationComposite => {
     ...Builer.field('passwordConfirmation')
       .required()
       .sameAs('password')
-      .build()
-  ])
-}
+      .build(),
+  ]);
+};

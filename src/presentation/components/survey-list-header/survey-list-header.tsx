@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import Styles from './survey-list-header-styles.scss'
+import React, { memo } from 'react';
+import Styles from './survey-list-header-styles.scss';
 
 const SurveyListHeader: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const SurveyListHeader: React.FC = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default memo(SurveyListHeader)
+export default memo(SurveyListHeader);

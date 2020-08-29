@@ -1,44 +1,44 @@
-import faker from 'faker'
+import faker from 'faker';
 import {
   RequiredFieldValidation,
   EmailValidation,
-  MinLengthValidation
-} from '@/validation/validators'
-import { ValidationBuilder as sut } from './validation-builder'
-import { CompareFieldValidation } from '@/validation/validators/compare-fields/compare-fields-validation'
+  MinLengthValidation,
+} from '@/validation/validators';
+import { ValidationBuilder as sut } from './validation-builder';
+import { CompareFieldValidation } from '@/validation/validators/compare-fields/compare-fields-validation';
 
 describe('ValidationBuilder', () => {
-  const field = faker.database.column()
-  const length = faker.random.number()
+  const field = faker.database.column();
+  const length = faker.random.number();
   test('Should return RequiredFieldValidation', () => {
-    const validations = sut.field(field).required().build()
-    expect(validations).toEqual([new RequiredFieldValidation(field)])
-  })
+    const validations = sut.field(field).required().build();
+    expect(validations).toEqual([new RequiredFieldValidation(field)]);
+  });
 
   test('Should return EmailValidation', () => {
-    const validations = sut.field(field).email().build()
-    expect(validations).toEqual([new EmailValidation(field)])
-  })
+    const validations = sut.field(field).email().build();
+    expect(validations).toEqual([new EmailValidation(field)]);
+  });
 
   test('Should return MinLengthValidation', () => {
-    const validations = sut.field(field).min(length).build()
-    expect(validations).toEqual([new MinLengthValidation(field, length)])
-  })
+    const validations = sut.field(field).min(length).build();
+    expect(validations).toEqual([new MinLengthValidation(field, length)]);
+  });
 
   test('Should return CompareFieldValidation', () => {
-    const fieldToCompare = faker.database.column()
-    const validations = sut.field(field).sameAs(fieldToCompare).build()
+    const fieldToCompare = faker.database.column();
+    const validations = sut.field(field).sameAs(fieldToCompare).build();
     expect(validations).toEqual([
-      new CompareFieldValidation(field, fieldToCompare)
-    ])
-  })
+      new CompareFieldValidation(field, fieldToCompare),
+    ]);
+  });
 
   test('Should return a list of validations', () => {
-    const validations = sut.field(field).required().min(length).email().build()
+    const validations = sut.field(field).required().min(length).email().build();
     expect(validations).toEqual([
       new RequiredFieldValidation(field),
       new MinLengthValidation(field, length),
-      new EmailValidation(field)
-    ])
-  })
-})
+      new EmailValidation(field),
+    ]);
+  });
+});

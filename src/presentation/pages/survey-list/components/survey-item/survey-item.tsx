@@ -1,6 +1,6 @@
-import React from 'react'
-import { IconName, Icon } from '@/presentation/components'
-import Styles from './survey-item-styles.scss'
+import React from 'react';
+import { IconName, Icon } from '@/presentation/components';
+import Styles from './survey-item-styles.scss';
 
 const SurveyItem: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const SurveyItem: React.FC = () => {
       </div>
       <footer>Ver Resultado</footer>
     </li>
-  )
-}
+  );
+};
 
-export default SurveyItem
+export default SurveyItem;

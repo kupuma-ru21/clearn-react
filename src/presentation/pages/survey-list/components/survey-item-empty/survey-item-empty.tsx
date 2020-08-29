@@ -1,5 +1,5 @@
-import React from 'react'
-import Styles from './survey-item-empty-styles.scss'
+import React from 'react';
+import Styles from './survey-item-empty-styles.scss';
 
 const SurveyItemEmpty: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const SurveyItemEmpty: React.FC = () => {
       <li className={Styles.surveyItemEmpty}></li>
       <li className={Styles.surveyItemEmpty}></li>
     </>
-  )
-}
+  );
+};
 
-export default SurveyItemEmpty
+export default SurveyItemEmpty;
