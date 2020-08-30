@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const logo: React.FC = () => <img src="" />
+const logo: React.FC = () => <img src="" />;
 
-export default logo
+export default logo;

@@ -1,12 +1,12 @@
-import { makeSignUpValidation } from './signup-validation-factory'
+import { makeSignUpValidation } from './signup-validation-factory';
 import {
   ValidationComposite,
-  ValidationBuilder as Builer
-} from '@/validation/validators'
+  ValidationBuilder as Builer,
+} from '@/validation/validators';
 
 describe('SignUpValidatiionFactory', () => {
   test('Should make ValidationComposite with correct validations', () => {
-    const composite = makeSignUpValidation()
+    const composite = makeSignUpValidation();
     expect(composite).toEqual(
       ValidationComposite.build([
         ...Builer.field('name').required().min(5).build(),
@@ -15,8 +15,8 @@ describe('SignUpValidatiionFactory', () => {
         ...Builer.field('passwordConfirmation')
           .required()
           .sameAs('password')
-          .build()
+          .build(),
       ])
-    )
-  })
-})
+    );
+  });
+});
