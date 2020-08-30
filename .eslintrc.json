@@ -6,6 +6,7 @@
   },
   "extends": [
     "standard-with-typescript",
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:cypress/recommended",
     "plugin:prettier/recommended",
@@ -13,12 +14,11 @@
     "prettier/react"
   ],
   "env": {
+    "es6": true,
+    "jest": true,
     "cypress/globals": true
   },
-  "plugins": [
-    "react",
-    "cypress"
-  ],
+  "plugins": ["react", "cypress", "@typescript-eslint"],
   "parserOptions": {
     "project": "./tsconfig-eslint.json"
   },
@@ -29,6 +29,7 @@
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/return-await": "off",
     "no-unreachable": "error",
+    "no-console": "error",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "prettier/prettier": "error"
