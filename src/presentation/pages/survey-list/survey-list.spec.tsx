@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { mockSurveyListModel } from '@/domain/test';
 import { LoadSurveyList } from '@/domain/usecases';
 import { SurveyModel } from '@/domain/models';
@@ -33,13 +33,13 @@ describe('SurveyList Component', () => {
     await waitFor(() => surveyList);
   });
 
-  test('Should call LoadSurveyList ', async () => {
+  test('Should call LoadSurveyList', async () => {
     const { loadSurveyListSpy } = makeSut();
     expect(loadSurveyListSpy.callsCount).toBe(1);
     await waitFor(() => screen.getByRole('heading'));
   });
 
-  test('Should render SurveyItems on success ', async () => {
+  test('Should render SurveyItems on success', async () => {
     makeSut();
     const surveyList = screen.getByTestId('survey-list');
     await waitFor(() => surveyList);
@@ -47,7 +47,7 @@ describe('SurveyList Component', () => {
     expect(screen.queryByTestId('error')).not.toBeInTheDocument();
   });
 
-  test('Should render error on failure ', async () => {
+  test('Should render error on failure', async () => {
     const loadSurveyListSpy = new LoadSurveyListSpy();
     const error = new UnexpectedError();
     jest.spyOn(loadSurveyListSpy, 'loadAll').mockRejectedValueOnce(error);
@@ -55,5 +55,17 @@ describe('SurveyList Component', () => {
     await waitFor(() => screen.getByRole('heading'));
     expect(screen.getByTestId('error')).toHaveTextContent(error.message);
     expect(screen.queryByTestId('survey-list')).not.toBeInTheDocument();
+  });
+
+  test('Should call LoadSurveyList on reload', async () => {
+    const loadSurveyListSpy = new LoadSurveyListSpy();
+    jest
+      .spyOn(loadSurveyListSpy, 'loadAll')
+      .mockRejectedValueOnce(new UnexpectedError());
+    makeSut(loadSurveyListSpy);
+    await waitFor(() => screen.getByRole('heading'));
+    fireEvent.click(screen.getByTestId('reload'));
+    expect(loadSurveyListSpy.callsCount).toBe(1);
+    await waitFor(() => screen.getByRole('heading'));
   });
 });
