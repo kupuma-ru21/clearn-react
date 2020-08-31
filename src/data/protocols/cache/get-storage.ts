@@ -1,3 +1,3 @@
 export interface GetStorage {
-  get: (key: string) => void;
+  get: (key: string) => any;
 }
