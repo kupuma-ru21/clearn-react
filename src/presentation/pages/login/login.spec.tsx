@@ -5,13 +5,14 @@ import faker from 'faker';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import { Login } from '@/presentation/pages';
 import { ApiContext } from '@/presentation/context';
-import { ValidationStub, AuthenticationSpy, Helper } from '@/presentation/test';
+import { AuthenticationSpy } from '@/domain/test';
+import { ValidationStub, Helper } from '@/presentation/test';
 import { InvaildCredentialsError } from '@/domain/errors';
-import { AccountModel } from '@/domain/models';
+import { Authentication } from '@/domain/usecases';
 
 type SutType = {
   authenticationSpy: AuthenticationSpy;
-  setCurrentAccountMock: (account: AccountModel) => void;
+  setCurrentAccountMock: (account: Authentication.Model) => void;
 };
 type SutParams = {
   validationError: string;
