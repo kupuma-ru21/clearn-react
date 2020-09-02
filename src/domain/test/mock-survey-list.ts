@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { LoadSurveyList } from '../usecases';
+import { LoadSurveyList } from '@/domain/usecases';
 
 export const mockSurveyModel = (): LoadSurveyList.Model => ({
   id: faker.random.uuid(),
