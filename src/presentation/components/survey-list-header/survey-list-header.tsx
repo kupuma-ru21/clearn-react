@@ -5,7 +5,7 @@ import Styles from './survey-list-header-styles.scss';
 
 const SurveyListHeader: React.FC = () => {
   const history = useHistory();
-  const { setCurrentAccount } = useContext(ApiContext);
+  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext);
   const logout = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ): void => {
@@ -17,7 +17,7 @@ const SurveyListHeader: React.FC = () => {
     <header className={Styles.headerWrap}>
       <div className={Styles.headerContent}>
         <div className={Styles.logoutWrap}>
-          <span>Rodrigo</span>
+          <span data-testid="username">{getCurrentAccount().name}</span>
           <a data-testid="logout" href="#" onClick={logout}>
             Sair
           </a>
