@@ -1,24 +1,23 @@
 import React, { memo, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ApiContext } from '@/presentation/context';
+import { useLogout } from '@/presentation/hooks';
 import Styles from './survey-list-header-styles.scss';
 
 const SurveyListHeader: React.FC = () => {
-  const history = useHistory();
-  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext);
-  const logout = (
+  const logout = useLogout();
+  const { getCurrentAccount } = useContext(ApiContext);
+  const buttonClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    setCurrentAccount(undefined);
-    history.replace('/login');
+    logout();
   };
   return (
     <header className={Styles.headerWrap}>
       <div className={Styles.headerContent}>
         <div className={Styles.logoutWrap}>
           <span data-testid="username">{getCurrentAccount().name}</span>
-          <a data-testid="logout" href="#" onClick={logout}>
+          <a data-testid="logout" href="#" onClick={buttonClick}>
             Sair
           </a>
         </div>
