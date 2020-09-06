@@ -5,3 +5,9 @@ node_js:
 script:
   - npm run lint-check
   - npm run test:coveralls
+
+build:
+  provider: heroku
+  api_key: $HEROKE_API
+  app: fordevs--react
+  skip_cleanup: true
