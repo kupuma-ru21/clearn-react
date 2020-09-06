@@ -8,8 +8,8 @@ const makeSut = (
 ): CompareFieldValidation => new CompareFieldValidation(field, fieldToCompare);
 
 describe('CompareFieldValidation', () => {
-  const field = faker.database.column();
-  const fieldToCompare = faker.database.column();
+  const field = 'any_field';
+  const fieldToCompare = 'other_field';
   test('Should return error if compare is invalid', () => {
     const sut = makeSut(field, fieldToCompare);
     const error = sut.validate({
