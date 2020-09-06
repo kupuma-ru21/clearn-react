@@ -29,18 +29,26 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     passwordError: '',
     mainError: '',
   });
+
   useEffect(() => {
+    validate('email');
+  }, [state.email]);
+  useEffect(() => {
+    validate('password');
+  }, [state.password]);
+
+  const validate = (field: string): void => {
     const { email, password } = state;
     const formdata = { email, password };
-    const emailError = validation.validate('email', formdata);
-    const passwordError = validation.validate('password', formdata);
-    setState({
-      ...state,
-      emailError,
-      passwordError,
-      isFormIvalid: !!emailError || !!passwordError,
-    });
-  }, [state.email, state.password]);
+    setState((old) => ({
+      ...old,
+      [`${field}Error`]: validation.validate(field, formdata),
+    }));
+    setState((old) => ({
+      ...old,
+      isFormIvalid: !!old.emailError || !!old.passwordError,
+    }));
+  };
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
