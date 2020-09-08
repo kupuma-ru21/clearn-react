@@ -6,6 +6,12 @@
   width: 13px;
   height: 13px;
 
+  &.negative {
+    div {
+      background: $white;
+    }
+  }
+
   div {
     box-sizing: border-box;
     display: block;
