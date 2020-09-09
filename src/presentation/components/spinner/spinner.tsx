@@ -3,8 +3,8 @@ import Styles from './spinner-styles.scss';
 
 type Props = React.HTMLAttributes<HTMLElement> & { isNegative?: boolean };
 
-const Spinner: React.FC<Props> = (props: Props) => {
-  const neagtiveClass = props.isNegative ? Styles.negative : '';
+const Spinner: React.FC<Props> = ({ isNegative, ...props }: Props) => {
+  const neagtiveClass = isNegative ? Styles.negative : '';
   return (
     <div
       data-testid="spinner"
