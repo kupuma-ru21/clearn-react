@@ -56,7 +56,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     event.preventDefault();
     try {
       if (state.isLoading || state.isFormIvalid) return;
-      setState({ ...state, isLoading: true });
+      setState((old) => ({ ...old, isLoading: true }));
       const account = await authentication.auth({
         email: state.email,
         password: state.password,
@@ -64,7 +64,11 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
       setCurrentAccount(account);
       history.replace('/');
     } catch (error) {
-      setState({ ...state, isLoading: false, mainError: error.message });
+      setState((old) => ({
+        ...old,
+        isLoading: false,
+        mainError: error.message,
+      }));
     }
   };
 
