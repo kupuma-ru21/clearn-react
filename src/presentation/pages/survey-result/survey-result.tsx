@@ -13,7 +13,7 @@ const SurveyResult: React.FC = () => {
     <div className={Styles.surveyResultWrap}>
       <SurveyListHeader />
       <div className={Styles.contentWrap}>
-        {false && (
+        {true && (
           <>
             <hgroup>
               <Calendar date={new Date()} className={Styles.calendarWrap} />
@@ -23,6 +23,16 @@ const SurveyResult: React.FC = () => {
               </h2>
             </hgroup>
             <FlipMove className={Styles.answersList}>
+              <li>
+                <img src="http://fordevs.herokuapp.com/static/img/logo-react.png" />
+                <span className={Styles.answer}>ReactJs</span>
+                <span className={Styles.percent}>50%</span>
+              </li>
+              <li className={Styles.active}>
+                <img src="http://fordevs.herokuapp.com/static/img/logo-react.png" />
+                <span className={Styles.answer}>ReactJs</span>
+                <span className={Styles.percent}>50%</span>
+              </li>
               <li>
                 <img src="http://fordevs.herokuapp.com/static/img/logo-react.png" />
                 <span className={Styles.answer}>ReactJs</span>
