@@ -11,5 +11,3 @@ export const makeSignUp: React.FC = () => {
     />
   );
 };
-
-export default makeSignUp;

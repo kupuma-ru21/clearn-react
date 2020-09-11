@@ -2,12 +2,16 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { PrivateRoute } from '@/presentation/components';
 import { ApiContext } from '@/presentation/context';
-import { SurveyResult } from '@/presentation/pages';
 import {
   setCurrentAccountAdapter,
   getCurrentAccountAdapter,
 } from '@/main/adapters/current-account-adapter';
-import { makeLogin, makeSignUp, makeSuveyList } from '@/main/factories/pages';
+import {
+  makeLogin,
+  makeSignUp,
+  makeSuveyList,
+  makeSuveyResult,
+} from '@/main/factories/pages';
 
 const Router: React.FC = () => {
   return (
@@ -22,7 +26,7 @@ const Router: React.FC = () => {
           <Route path="/login" exact component={makeLogin} />
           <Route path="/signup" exact component={makeSignUp} />
           <PrivateRoute path="/" exact component={makeSuveyList} />
-          <PrivateRoute path="/surveys" exact component={SurveyResult} />
+          <PrivateRoute path="/surveys:id" exact component={makeSuveyResult} />
         </Switch>
       </BrowserRouter>
     </ApiContext.Provider>
