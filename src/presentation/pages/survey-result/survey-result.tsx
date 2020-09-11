@@ -10,6 +10,7 @@ import {
   Error,
 } from '@/presentation/components';
 import Styles from './survey-result-styles.scss';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   loadSurveyResult: LoadSurveyResult;
@@ -33,6 +34,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
       reload: !old.reload,
     }));
   };
+  const { goBack } = useHistory();
 
   useEffect(() => {
     loadSurveyResult
@@ -76,7 +78,9 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
                 </li>
               ))}
             </FlipMove>
-            <button>Volter</button>
+            <button data-testid="back-button" onClick={goBack}>
+              Volter
+            </button>
           </>
         )}
         {state.isLoading && <Loading />}
