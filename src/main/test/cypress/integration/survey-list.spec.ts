@@ -47,7 +47,7 @@ describe('SurveyList', () => {
     cy.getByTestId('username').should('contain.text', name);
   });
 
-  it('Should logout on logout lick click', () => {
+  it('Should logout on logout click', () => {
     mockUnexpectedError();
     cy.visit('');
     cy.getByTestId('logout').click();
