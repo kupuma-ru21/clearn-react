@@ -5,4 +5,9 @@ describe('Private Route', () => {
     cy.visit('');
     Helper.testUrl('/login');
   });
+
+  it('Should logout if survey-result has no token', () => {
+    cy.visit('/surveys/any_id');
+    Helper.testUrl('/login');
+  });
 });
