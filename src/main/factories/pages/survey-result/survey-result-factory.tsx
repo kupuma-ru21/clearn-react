@@ -1,7 +1,7 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { makeRemoteLoadSurveyResult } from '@/main/factories/usecases';
 import { SurveyResult } from '@/presentation/pages';
-import { useParams } from 'react-router-dom';
 
 export const makeSuveyResult: React.FC = () => {
   const { id } = useParams();

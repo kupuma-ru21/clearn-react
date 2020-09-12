@@ -26,7 +26,7 @@ const Router: React.FC = () => {
           <Route path="/login" exact component={makeLogin} />
           <Route path="/signup" exact component={makeSignUp} />
           <PrivateRoute path="/" exact component={makeSuveyList} />
-          <PrivateRoute path="/surveys:id" exact component={makeSuveyResult} />
+          <PrivateRoute path="/surveys/:id" component={makeSuveyResult} />
         </Switch>
       </BrowserRouter>
     </ApiContext.Provider>
