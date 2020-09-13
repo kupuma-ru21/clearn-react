@@ -1,5 +1,6 @@
+import React, { useContext } from 'react';
 import { SurveyResultAnswerModel } from '@/domain/models';
-import React from 'react';
+import { SurveyResultContext } from '@/presentation/pages/survey-result/components';
 import Styles from './answer-styles.scss';
 
 type Props = {
@@ -7,11 +8,17 @@ type Props = {
 };
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
+  const { onAnswer } = useContext(SurveyResultContext);
   const activeClassName = answer.isCurrentAccountAnswer ? Styles.active : '';
+  const answerClick = (event: React.MouseEvent): void => {
+    if (event.currentTarget.classList.contains(Styles.active)) return;
+    onAnswer(answer.answer);
+  };
   return (
     <li
       data-testid="answer-wrap"
       className={[Styles.answerWrap, activeClassName].join(' ')}
+      onClick={answerClick}
     >
       {answer.image && (
         <img data-testid="image" src={answer.image} alt={answer.answer} />
