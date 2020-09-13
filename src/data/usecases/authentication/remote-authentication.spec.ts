@@ -21,21 +21,16 @@ const makeSut = (url: string = faker.internet.url()): SutTypes => {
 };
 
 describe('RemoteAuthentication', () => {
-  test('Shoud call HttpClient with correct URL and Method', async () => {
+  test('Shoud call HttpClient with correct values', async () => {
     const url = faker.internet.url();
     const { sut, httpClientSpy } = makeSut(url);
 
-    await sut.auth(mockAuthentication());
+    const authenticationParams = mockAuthentication();
+    await sut.auth(authenticationParams);
+
     expect(httpClientSpy.url).toBe(url);
     expect(httpClientSpy.method).toBe('post');
-  });
-
-  test('Shoud call HttpClient with correct body', async () => {
-    const { sut, httpClientSpy } = makeSut();
-    const AuthenticationParams = mockAuthentication();
-    await sut.auth(AuthenticationParams);
-
-    expect(httpClientSpy.body).toEqual(AuthenticationParams);
+    expect(httpClientSpy.body).toEqual(authenticationParams);
   });
 
   test('Shoud throw InvaildCredentialsError if HttpClient returns 401', async () => {
